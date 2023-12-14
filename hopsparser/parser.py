@@ -497,7 +497,7 @@ class BiAffineParser(nn.Module):
 
         # ARC LOSS
         # [batch×num_deps, num_heads]
-        head_scores_flat = parser_output.head_scores.view(-1, parser_output.head_scores.size(-1))
+        head_scores_flat = parser_output.head_scores.reshape(-1, parser_output.head_scores.size(-1))
         all_loss["head"] = self.marginal_loss(head_scores_flat, batch.heads.view(-1))
 
         # LABEL LOSS We will select the labels for the gold heads, so we have to provide one when
